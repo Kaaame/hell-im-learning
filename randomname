@@ -1,0 +1,71 @@
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <cstdio>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+string MakeRandomString(string name, int num)
+	{
+		fstream file;
+		string data, line;
+		int counter = 0;
+		file.open(name.c_str(),ios::in);
+		{
+			if(file.good())
+			{
+				while(getline(file,data))
+				{
+					counter++;
+					if(counter == num) line = data;
+				}
+			}
+			else
+			{
+				cout <<"Error in MakeRandomString";
+			}
+		}
+		return line;
+	}
+
+int CheckLines(string name)
+{
+	fstream file;
+	string data;
+	int counter = 0;
+	//deklaracja pliku z imieniem i nazwiskiem
+	//name = "name.txt";
+	//sur = "surname.txt";
+	file.open(name.c_str(),ios::in);
+	if(file.good())
+	{
+		while(getline(file, data))
+		{
+			++counter;
+		}
+	}
+	else
+	{
+		cout <<"error in CheckLines" << endl;
+		return 0;
+	}
+	file.close();
+	//cout << counter; jakby co to dziala
+	return counter;
+}
+
+int main()
+{
+	srand (time(NULL)); //inicjalizacja randomu
+	int num1, num2;
+	string imie = "name.txt",nazwisko="surname.txt";
+	num1 = rand() % CheckLines(imie)+1;
+	num2 = rand() % CheckLines(nazwisko)+1;
+	//CheckLines(nazwa);
+	//cout << num1 << " liczba rand 1" << endl;
+	//cout << num2 << " liczba rand 2" << endl;
+	cout << MakeRandomString(imie,num1) << " " << MakeRandomString(nazwisko, num2);
+	
+}
