@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+#include <conio.h>
+
+using namespace std;
+
+void HigLow();
+
+//void HeadTail();
+
+void Menu();
+
+int main()
+{
+	srand(time(NULL));//init random
+	Menu();
+	
+}
+
+void Menu()
+{
+	int opt;
+	cout << "1. Higher/Lower" << endl << "2. Head/Tail" << endl << "3. Exit" << endl;
+	cin >> opt;
+	if (opt == 1) HigLow();
+	//if (opt == 2) HeadTail();
+	if (opt == 3) exit(1);
+	else
+	{
+		cout << "Invalid option." << endl;
+		Menu();
+	}
+}
+
+void HigLow()
+{
+	int intervallow, intervalup, num, answer;
+	float range;
+	cout << "Choose lower limit";
+	cin >> intervallow;
+	cout << "Choose upper limit";
+	cin >> intervalup;
+	num = rand() % intervalup + intervallow;
+	cout << "Write number and press enter";
+	while (answer != num)
+	{
+		cin >> answer;
+		range = answer/num;
+		if (range < 1.1 and range > 0.9) cout << "Really hot" << endl;
+		if ((range > 0.5 and range <= 0.9)or(range >=1.1 and range <1.5)) cout << "Hot" << endl;
+		if (range <=0.5 or range >= 1.5) cout << "Cold" << endl;
+	}
+	cout << "You did it" << endl;
+	Menu();
+}
