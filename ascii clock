@@ -3,52 +3,89 @@
 #include <fstream>
 #include <time.h>
 #include <vector>
+#include <windows.h>
 
 using namespace std;
 
-vector<string> ReturnCharArray();
+vector<string> ReturnCharArray(string filename);
 void PrintAsciiChar(vector<string> input);
+void PrintMultipleChar(vector<string> first, vector<string> second);
 //Wszystkie pliki zawieraja tylko X linijek
-const int FileLength = 3;
+const int FileLength = 4;
 
 int main()
 {
-  string nameoffile;
-  cin >> nameoffile;
-  PrintAsciiChar(ReturnCharArray(nameoffile));
+  //string nameoffile;
+  //cin >> nameoffile;
+  //PrintAsciiChar(ReturnCharArray(nameoffile));
+  //string::iterator it = stringname.begin();  ITERATOR DLA CIAGU ZNAKOW
+  vector<string> onechar = ReturnCharArray("1.txt");
+  vector<string> twochar = ReturnCharArray("2.txt");
+  vector<string> threechar = ReturnCharArray("3.txt");
+  vector<string> fourchar = ReturnCharArray("4.txt");
+  vector<string> fivechar = ReturnCharArray("5.txt");
+  vector<string> sixchar = ReturnCharArray("6.txt");
+  vector<string> sevenchar = ReturnCharArray("7.txt");
+  vector<string> eightchar = ReturnCharArray("8.txt");
+  vector<string> ninechar = ReturnCharArray("9.txt");
+  vector<string> zerochar = ReturnCharArray("0.txt");
+  vector<string> colon = ReturnCharArray("colon.txt");
+  PrintAsciiChar(onechar);
+  PrintAsciiChar(twochar);
+  PrintAsciiChar(threechar);
+  PrintAsciiChar(fourchar);
+  PrintAsciiChar(fivechar);
+  PrintAsciiChar(sixchar);
+  PrintAsciiChar(sevenchar);
+  PrintAsciiChar(eightchar);
+  PrintAsciiChar(ninechar);
+  PrintAsciiChar(zerochar);
+  PrintAsciiChar(colon);
+  PrintMultipleChar(onechar, twochar);
+  //Sleep(500); DO WYCZYSZCZENIA
+  //system("cls"); CZYSZCZENIE EKRANU, odswiezanie ekranu, co by nie byl zawalony poprzednimi czasami
 }
 /*
 Zwraca tablice ze znakami ascii, chyba trzeba dac endl pomiedzy liniami
 plik powinien zawierav jeden znak ascii, to jest tylko 1 lub 2 etc.
-endl moze przeszkadzac
+endl moze przeszkadzac- mialem racje
 */
 
-vector<string> ReturnCharArray(string filename);
+vector<string> ReturnCharArray(string filename)
 {
   fstream file;
   string data;
-  vector<string> characters[];
-  file.open(filename.c_str(),ios::in)
+  vector<string> characters;
+  file.open(filename.c_str(),ios::in);
   if (file.good())
   {
     while(!file.eof())
     {
       getline(file,data);
       characters.push_back(data);
-      characters.push_back("\n");
+      //characters.push_back("\n"); nie potrzebne
     }
   }
   file.close();
   return characters;
 }
 
-void PrintAsciiChar(vector<string> input)
+void PrintAsciiChar(vector<string> input) // dziala dla jednego znaku :)
 {
   /* Zakladajac, ze poprzednia funkcja dziala, powinnismy wydrukowac
     poprzez iteracje wartosci tablicy characters, narazie jeden znak
   */
-  for(int i = 0; i<FileLength;i++)
+  for(int i = 0; i<FileLength;i++) // iteracja poprzez linie tablicy
   {
-    printf("%s \n", input[i] );
+    //printf("%s \n", input[i] ); nie dziala
+    cout << input[i] << endl;
   }
+}
+void PrintMultipleChar(vector<string> first, vector<string> second)
+{
+	/* Teraz zaleznosc od czasu */
+	for (int i = 0; i<FileLength;i++)
+	{
+		cout << first[i] << " " << second[i] << endl;
+	}
 }
