@@ -3,10 +3,11 @@
 #include <time.h>
 #include <fstream>
 #include <vector>
-//#include <windows.h>
+#include <windows.h>
 
 
 using namespace std;
+int a=0,b=2,c= 4;
 
 vector<string> ReturnCharArray(string filename);
 void PrintAsciiChar(vector<string> input);
@@ -20,15 +21,15 @@ const int FileLength = 4;
 int main()
 {
   time_t rawtime;
+  string times;
   struct tm * timeinfo;
-  string buffer; //deklaracja pojemnika na czas
-  //strftime(buffer,80,"%H%M%S",timeinfo) //definicja buffer
-  //czas = time(0);
-  //struct czas * now = localtime(&czas); // uzywanie wyrazow struktury, dostep do niej poprzez operator ->
+  static char buffer[80]; //deklaracja pojemnika na czas
+  time (&rawtime);
+  timeinfo = localtime(&rawtime);
   vector<string> hf = ReturnCharArray("0.txt");
   vector<string> hs = ReturnCharArray("0.txt");
-  vector<string> ms = ReturnCharArray("0.txt");
   vector<string> mf = ReturnCharArray("0.txt");
+  vector<string> ms = ReturnCharArray("0.txt");
   vector<string> sf = ReturnCharArray("0.txt");
   vector<string> ss = ReturnCharArray("0.txt");
   vector<string> onechar = ReturnCharArray("1.txt");
@@ -42,109 +43,103 @@ int main()
   vector<string> ninechar = ReturnCharArray("9.txt");
   vector<string> zerochar = ReturnCharArray("0.txt");
   vector<string> colon = ReturnCharArray("colon.txt");
-  /*PrintAsciiChar(onechar);
-  PrintAsciiChar(twochar);
-  PrintAsciiChar(threechar);
-  PrintAsciiChar(fourchar);
-  PrintAsciiChar(fivechar);
-  PrintAsciiChar(sixchar);
-  PrintAsciiChar(sevenchar);
-  PrintAsciiChar(eightchar);
-  PrintAsciiChar(ninechar);
-  PrintAsciiChar(zerochar);
-  PrintAsciiChar(colon);
-  PrintMultipleChar(onechar, twochar);
-  PrintAsciiTime(hf,hs,mf,ms,sf,ss);//wiem, ze dziala */
   while(true)
   {
-    strftime(buffer,80,"%H%M%S",timeinfo)
-    for (int i = 0;i<=buffer.length();i++)
+    strftime(buffer,80,"%H%M%S",timeinfo);
+    for (a;a<=1;a++)
     {
-      if(i==0)
+      if(a==0)
       {
-        if(buffer[i]=="0")hf=zerochar;
-        if(buffer[i]=="1")hf=onechar;
-        if(buffer[i]=="2")hf=twochar;
-        if(buffer[i]=="3")hf=threechar;
-        if(buffer[i]=="4")hf=fourchar;
-        if(buffer[i]=="5")hf=fivechar;
-        if(buffer[i]=="6")hf=sixchar;
-        if(buffer[i]=="7")hf=sevenchar;
-        if(buffer[i]=="8")hf=eightchar;
-        if(buffer[i]=="9")hf=ninechar;
+        if(buffer[a]=='0')hf=zerochar;
+        if(buffer[a]=='1')hf=onechar;
+        if(buffer[a]=='2')hf=twochar;
+        if(buffer[a]=='3')hf=threechar;
+        if(buffer[a]=='4')hf=fourchar;
+        if(buffer[a]=='5')hf=fivechar;
+        if(buffer[a]=='6')hf=sixchar;
+        if(buffer[a]=='7')hf=sevenchar;
+        if(buffer[a]=='8')hf=eightchar;
+        if(buffer[a]=='9')hf=ninechar;
       }
-      if(i==1)
+      if(a==1)
       {
-        if(buffer[i]=="0")hs=zerochar;
-        if(buffer[i]=="1")hs=onechar;
-        if(buffer[i]=="2")hs=twochar;
-        if(buffer[i]=="3")hs=threechar;
-        if(buffer[i]=="4")hs=fourchar;
-        if(buffer[i]=="5")hs=fivechar;
-        if(buffer[i]=="6")hs=sixchar;
-        if(buffer[i]=="7")hs=sevenchar;
-        if(buffer[i]=="8")hs=eightchar;
-        if(buffer[i]=="9")hs=ninechar;
+        if(buffer[a]=='0')hs=zerochar;
+        if(buffer[a]=='1')hs=onechar;
+        if(buffer[a]=='2')hs=twochar;
+        if(buffer[a]=='3')hs=threechar;
+        if(buffer[a]=='4')hs=fourchar;
+        if(buffer[a]=='5')hs=fivechar;
+        if(buffer[a]=='6')hs=sixchar;
+        if(buffer[a]=='7')hs=sevenchar;
+        if(buffer[a]=='8')hs=eightchar;
+        if(buffer[a]=='9')hs=ninechar;
       }
-      if(i==2)
+    //i=0;
+	}
+	for (b;b<=3;b++)
+	{
+      if(b==2)
       {
-        if(buffer[i]=="0")mf=zerochar;
-        if(buffer[i]=="1")mf=onechar;
-        if(buffer[i]=="2")mf=twochar;
-        if(buffer[i]=="3")mf=threechar;
-        if(buffer[i]=="4")mf=fourchar;
-        if(buffer[i]=="5")mf=fivechar;
-        if(buffer[i]=="6")mf=sixchar;
-        if(buffer[i]=="7")mf=sevenchar;
-        if(buffer[i]=="8")mf=eightchar;
-        if(buffer[i]=="9")mf=ninechar;
+        if(buffer[b]=='0')mf=zerochar;
+        if(buffer[b]=='1')mf=onechar;
+        if(buffer[b]=='2')mf=twochar;
+        if(buffer[b]=='3')mf=threechar;
+        if(buffer[b]=='4')mf=fourchar;
+        if(buffer[b]=='5')mf=fivechar;
+        if(buffer[b]=='6')mf=sixchar;
+        if(buffer[b]=='7')mf=sevenchar;
+        if(buffer[b]=='8')mf=eightchar;
+        if(buffer[b]=='9')mf=ninechar;
       }
-      if(i==3)
+      if(b==3)
       {
-        if(buffer[i]=="0")ms=zerochar;
-        if(buffer[i]=="1")ms=onechar;
-        if(buffer[i]=="2")ms=twochar;
-        if(buffer[i]=="3")ms=threechar;
-        if(buffer[i]=="4")ms=fourchar;
-        if(buffer[i]=="5")ms=fivechar;
-        if(buffer[i]=="6")ms=sixchar;
-        if(buffer[i]=="7")ms=sevenchar;
-        if(buffer[i]=="8")ms=eightchar;
-        if(buffer[i]=="9")ms=ninechar;
+        if(buffer[b]=='0')ms=zerochar;
+        if(buffer[b]=='1')ms=onechar;
+        if(buffer[b]=='2')ms=twochar;
+        if(buffer[b]=='3')ms=threechar;
+        if(buffer[b]=='4')ms=fourchar;
+        if(buffer[b]=='5')ms=fivechar;
+        if(buffer[b]=='6')ms=sixchar;
+        if(buffer[b]=='7')ms=sevenchar;
+        if(buffer[b]=='8')ms=eightchar;
+        if(buffer[b]=='9')ms=ninechar;
       }
-      if(i==4)
+	//i=2;
+	}
+	for (c;c<=5;c++)
+	{
+      if(c==4)
       {
-        if(buffer[i]=="0")sf=zerochar;
-        if(buffer[i]=="1")sf=onechar;
-        if(buffer[i]=="2")sf=twochar;
-        if(buffer[i]=="3")sf=threechar;
-        if(buffer[i]=="4")sf=fourchar;
-        if(buffer[i]=="5")sf=fivechar;
-        if(buffer[i]=="6")sf=sixchar;
-        if(buffer[i]=="7")sf=sevenchar;
-        if(buffer[i]=="8")sf=eightchar;
-        if(buffer[i]=="9")sf=ninechar;
+        if(buffer[c]=='0')sf=zerochar;
+        if(buffer[c]=='1')sf=onechar;
+        if(buffer[c]=='2')sf=twochar;
+        if(buffer[c]=='3')sf=threechar;
+        if(buffer[c]=='4')sf=fourchar;
+        if(buffer[c]=='5')sf=fivechar;
+        if(buffer[c]=='6')sf=sixchar;
+        if(buffer[c]=='7')sf=sevenchar;
+        if(buffer[c]=='8')sf=eightchar;
+        if(buffer[c]=='9')sf=ninechar;
       }
-      if(i==5)
+      if(c==5)
       {
-        if(buffer[i]=="0")ss=zerochar;
-        if(buffer[i]=="1")ss=onechar;
-        if(buffer[i]=="2")ss=twochar;
-        if(buffer[i]=="3")ss=threechar;
-        if(buffer[i]=="4")ss=fourchar;
-        if(buffer[i]=="5")ss=fivechar;
-        if(buffer[i]=="6")ss=sixchar;
-        if(buffer[i]=="7")ss=sevenchar;
-        if(buffer[i]=="8")ss=eightchar;
-        if(buffer[i]=="9")ss=ninechar;
-      }
+        if(buffer[c]=='0')ss=zerochar;
+        if(buffer[c]=='1')ss=onechar;
+        if(buffer[c]=='2')ss=twochar;
+        if(buffer[c]=='3')ss=threechar;
+        if(buffer[c]=='4')ss=fourchar;
+        if(buffer[c]=='5')ss=fivechar;
+        if(buffer[c]=='6')ss=sixchar;
+        if(buffer[c]=='7')ss=sevenchar;
+        if(buffer[c]=='8')ss=eightchar;
+        if(buffer[c]=='9')ss=ninechar;
+  		}
     }
-    string(100,"\n");
+    PrintAsciiTime(hf,hs,mf,ms,sf,ss);
+    Sleep(1000);
+    //cout << buffer << endl;
+    system("cls");
   }
-  //Sleep(500); DO WYCZYSZCZENIA
-  /*system("cls"); CZYSZCZENIE EKRANU, odswiezanie ekranu, co by nie byl
-  zawalony poprzednimi czasami, sam system jest zly gdyz nie wiadomo co robi
-  z programem etc lepiej uzyc string(100, "\n");  */
 }
 /*
 Zwraca tablice ze znakami ascii, chyba trzeba dac endl pomiedzy liniami
