@@ -1,24 +1,33 @@
-#include <conio.h>
+//#include <conio.h>
 #include <iostream>
-#include <fstream>
 #include <time.h>
+#include <fstream>
 #include <vector>
-#include <windows.h>
+//#include <windows.h>
+
 
 using namespace std;
 
 vector<string> ReturnCharArray(string filename);
 void PrintAsciiChar(vector<string> input);
 void PrintMultipleChar(vector<string> first, vector<string> second);
+void PrintAsciiTime(vector<string> hourfirst, vector<string> hoursecond,
+                    vector<string> minutefirst, vector<string> minutesecond,
+                    vector<string> secondfirst, vector<string> secondsecond);
 //Wszystkie pliki zawieraja tylko X linijek
 const int FileLength = 4;
 
 int main()
 {
-  //string nameoffile;
-  //cin >> nameoffile;
-  //PrintAsciiChar(ReturnCharArray(nameoffile));
-  //string::iterator it = stringname.begin();  ITERATOR DLA CIAGU ZNAKOW
+  //time_t czas; // ustawienie czasu?
+  //czas = time(0);
+  //struct czas * now = localtime(&czas); // uzywanie wyrazow struktury, dostep do niej poprzez operator ->
+  vector<string> hf = ReturnCharArray("0.txt");
+  vector<string> hs = ReturnCharArray("0.txt");
+  vector<string> ms = ReturnCharArray("0.txt");
+  vector<string> mf = ReturnCharArray("0.txt");
+  vector<string> sf = ReturnCharArray("0.txt");
+  vector<string> ss = ReturnCharArray("0.txt");
   vector<string> onechar = ReturnCharArray("1.txt");
   vector<string> twochar = ReturnCharArray("2.txt");
   vector<string> threechar = ReturnCharArray("3.txt");
@@ -42,8 +51,11 @@ int main()
   PrintAsciiChar(zerochar);
   PrintAsciiChar(colon);
   PrintMultipleChar(onechar, twochar);
+  PrintAsciiTime(hf,hs,mf,ms,sf,ss);
   //Sleep(500); DO WYCZYSZCZENIA
-  //system("cls"); CZYSZCZENIE EKRANU, odswiezanie ekranu, co by nie byl zawalony poprzednimi czasami
+  /*system("cls"); CZYSZCZENIE EKRANU, odswiezanie ekranu, co by nie byl
+  zawalony poprzednimi czasami, sam system jest zly gdyz nie wiadomo co robi
+  z programem etc lepiej uzyc string(100, "\n");  */
 }
 /*
 Zwraca tablice ze znakami ascii, chyba trzeba dac endl pomiedzy liniami
@@ -88,4 +100,18 @@ void PrintMultipleChar(vector<string> first, vector<string> second)
 	{
 		cout << first[i] << " " << second[i] << endl;
 	}
+}
+void PrintAsciiTime(vector<string> hourfirst, vector<string> hoursecond,
+                    vector<string> minutefirst, vector<string> minutesecond,
+                    vector<string> secondfirst, vector<string> secondsecond)
+{
+  for (int i = 0; i<FileLength;i++)
+  {
+    vector<string> colon = ReturnCharArray("colon.txt");
+    cout << hourfirst[i] << hoursecond[i] << colon[i]
+    << minutefirst[i] << minutesecond[i] << colon[i]
+    << secondfirst[i] << secondsecond[i] << endl;
+
+  }
+
 }
