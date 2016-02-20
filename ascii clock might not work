@@ -1,0 +1,206 @@
+//#include <conio.h>
+#include <iostream>
+#include <time.h>
+#include <fstream>
+#include <vector>
+//#include <windows.h>
+
+
+using namespace std;
+
+vector<string> ReturnCharArray(string filename);
+void PrintAsciiChar(vector<string> input);
+void PrintMultipleChar(vector<string> first, vector<string> second);
+void PrintAsciiTime(vector<string> hourfirst, vector<string> hoursecond,
+                    vector<string> minutefirst, vector<string> minutesecond,
+                    vector<string> secondfirst, vector<string> secondsecond);
+//Wszystkie pliki zawieraja tylko X linijek
+const int FileLength = 4;
+
+int main()
+{
+  time_t rawtime;
+  struct tm * timeinfo;
+  string buffer; //deklaracja pojemnika na czas
+  //strftime(buffer,80,"%H%M%S",timeinfo) //definicja buffer
+  //czas = time(0);
+  //struct czas * now = localtime(&czas); // uzywanie wyrazow struktury, dostep do niej poprzez operator ->
+  vector<string> hf = ReturnCharArray("0.txt");
+  vector<string> hs = ReturnCharArray("0.txt");
+  vector<string> ms = ReturnCharArray("0.txt");
+  vector<string> mf = ReturnCharArray("0.txt");
+  vector<string> sf = ReturnCharArray("0.txt");
+  vector<string> ss = ReturnCharArray("0.txt");
+  vector<string> onechar = ReturnCharArray("1.txt");
+  vector<string> twochar = ReturnCharArray("2.txt");
+  vector<string> threechar = ReturnCharArray("3.txt");
+  vector<string> fourchar = ReturnCharArray("4.txt");
+  vector<string> fivechar = ReturnCharArray("5.txt");
+  vector<string> sixchar = ReturnCharArray("6.txt");
+  vector<string> sevenchar = ReturnCharArray("7.txt");
+  vector<string> eightchar = ReturnCharArray("8.txt");
+  vector<string> ninechar = ReturnCharArray("9.txt");
+  vector<string> zerochar = ReturnCharArray("0.txt");
+  vector<string> colon = ReturnCharArray("colon.txt");
+  /*PrintAsciiChar(onechar);
+  PrintAsciiChar(twochar);
+  PrintAsciiChar(threechar);
+  PrintAsciiChar(fourchar);
+  PrintAsciiChar(fivechar);
+  PrintAsciiChar(sixchar);
+  PrintAsciiChar(sevenchar);
+  PrintAsciiChar(eightchar);
+  PrintAsciiChar(ninechar);
+  PrintAsciiChar(zerochar);
+  PrintAsciiChar(colon);
+  PrintMultipleChar(onechar, twochar);
+  PrintAsciiTime(hf,hs,mf,ms,sf,ss);//wiem, ze dziala */
+  while(true)
+  {
+    strftime(buffer,80,"%H%M%S",timeinfo)
+    for (int i = 0;i<=buffer.length();i++)
+    {
+      if(i==0)
+      {
+        if(buffer[i]=="0")hf=zerochar;
+        if(buffer[i]=="1")hf=onechar;
+        if(buffer[i]=="2")hf=twochar;
+        if(buffer[i]=="3")hf=threechar;
+        if(buffer[i]=="4")hf=fourchar;
+        if(buffer[i]=="5")hf=fivechar;
+        if(buffer[i]=="6")hf=sixchar;
+        if(buffer[i]=="7")hf=sevenchar;
+        if(buffer[i]=="8")hf=eightchar;
+        if(buffer[i]=="9")hf=ninechar;
+      }
+      if(i==1)
+      {
+        if(buffer[i]=="0")hs=zerochar;
+        if(buffer[i]=="1")hs=onechar;
+        if(buffer[i]=="2")hs=twochar;
+        if(buffer[i]=="3")hs=threechar;
+        if(buffer[i]=="4")hs=fourchar;
+        if(buffer[i]=="5")hs=fivechar;
+        if(buffer[i]=="6")hs=sixchar;
+        if(buffer[i]=="7")hs=sevenchar;
+        if(buffer[i]=="8")hs=eightchar;
+        if(buffer[i]=="9")hs=ninechar;
+      }
+      if(i==2)
+      {
+        if(buffer[i]=="0")mf=zerochar;
+        if(buffer[i]=="1")mf=onechar;
+        if(buffer[i]=="2")mf=twochar;
+        if(buffer[i]=="3")mf=threechar;
+        if(buffer[i]=="4")mf=fourchar;
+        if(buffer[i]=="5")mf=fivechar;
+        if(buffer[i]=="6")mf=sixchar;
+        if(buffer[i]=="7")mf=sevenchar;
+        if(buffer[i]=="8")mf=eightchar;
+        if(buffer[i]=="9")mf=ninechar;
+      }
+      if(i==3)
+      {
+        if(buffer[i]=="0")ms=zerochar;
+        if(buffer[i]=="1")ms=onechar;
+        if(buffer[i]=="2")ms=twochar;
+        if(buffer[i]=="3")ms=threechar;
+        if(buffer[i]=="4")ms=fourchar;
+        if(buffer[i]=="5")ms=fivechar;
+        if(buffer[i]=="6")ms=sixchar;
+        if(buffer[i]=="7")ms=sevenchar;
+        if(buffer[i]=="8")ms=eightchar;
+        if(buffer[i]=="9")ms=ninechar;
+      }
+      if(i==4)
+      {
+        if(buffer[i]=="0")sf=zerochar;
+        if(buffer[i]=="1")sf=onechar;
+        if(buffer[i]=="2")sf=twochar;
+        if(buffer[i]=="3")sf=threechar;
+        if(buffer[i]=="4")sf=fourchar;
+        if(buffer[i]=="5")sf=fivechar;
+        if(buffer[i]=="6")sf=sixchar;
+        if(buffer[i]=="7")sf=sevenchar;
+        if(buffer[i]=="8")sf=eightchar;
+        if(buffer[i]=="9")sf=ninechar;
+      }
+      if(i==5)
+      {
+        if(buffer[i]=="0")ss=zerochar;
+        if(buffer[i]=="1")ss=onechar;
+        if(buffer[i]=="2")ss=twochar;
+        if(buffer[i]=="3")ss=threechar;
+        if(buffer[i]=="4")ss=fourchar;
+        if(buffer[i]=="5")ss=fivechar;
+        if(buffer[i]=="6")ss=sixchar;
+        if(buffer[i]=="7")ss=sevenchar;
+        if(buffer[i]=="8")ss=eightchar;
+        if(buffer[i]=="9")ss=ninechar;
+      }
+    }
+    string(100,"\n");
+  }
+  //Sleep(500); DO WYCZYSZCZENIA
+  /*system("cls"); CZYSZCZENIE EKRANU, odswiezanie ekranu, co by nie byl
+  zawalony poprzednimi czasami, sam system jest zly gdyz nie wiadomo co robi
+  z programem etc lepiej uzyc string(100, "\n");  */
+}
+/*
+Zwraca tablice ze znakami ascii, chyba trzeba dac endl pomiedzy liniami
+plik powinien zawierav jeden znak ascii, to jest tylko 1 lub 2 etc.
+endl moze przeszkadzac- mialem racje
+*/
+
+vector<string> ReturnCharArray(string filename)
+{
+  fstream file;
+  string data;
+  vector<string> characters;
+  file.open(filename.c_str(),ios::in);
+  if (file.good())
+  {
+    while(!file.eof())
+    {
+      getline(file,data);
+      characters.push_back(data);
+      //characters.push_back("\n"); nie potrzebne
+    }
+  }
+  file.close();
+  return characters;
+}
+
+void PrintAsciiChar(vector<string> input) // dziala dla jednego znaku :)
+{
+  /* Zakladajac, ze poprzednia funkcja dziala, powinnismy wydrukowac
+    poprzez iteracje wartosci tablicy characters, narazie jeden znak
+  */
+  for(int i = 0; i<FileLength;i++) // iteracja poprzez linie tablicy
+  {
+    //printf("%s \n", input[i] ); nie dziala
+    cout << input[i] << endl;
+  }
+}
+void PrintMultipleChar(vector<string> first, vector<string> second)
+{
+	/* Teraz zaleznosc od czasu */
+	for (int i = 0; i<FileLength;i++)
+	{
+		cout << first[i] << " " << second[i] << endl;
+	}
+}
+void PrintAsciiTime(vector<string> hourfirst, vector<string> hoursecond,
+                    vector<string> minutefirst, vector<string> minutesecond,
+                    vector<string> secondfirst, vector<string> secondsecond)
+{
+  for (int i = 0; i<FileLength;i++)
+  {
+    vector<string> colon = ReturnCharArray("colon.txt");
+    cout << hourfirst[i] << hoursecond[i] << colon[i]
+    << minutefirst[i] << minutesecond[i] << colon[i]
+    << secondfirst[i] << secondsecond[i] << endl;
+
+  }
+
+}
