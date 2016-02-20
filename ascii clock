@@ -1,0 +1,54 @@
+#include <conio.h>
+#include <iostream>
+#include <fstream>
+#include <time.h>
+#include <vector>
+
+using namespace std;
+
+vector<string> ReturnCharArray();
+void PrintAsciiChar(vector<string> input);
+//Wszystkie pliki zawieraja tylko X linijek
+const int FileLength = 3;
+
+int main()
+{
+  string nameoffile;
+  cin >> nameoffile;
+  PrintAsciiChar(ReturnCharArray(nameoffile));
+}
+/*
+Zwraca tablice ze znakami ascii, chyba trzeba dac endl pomiedzy liniami
+plik powinien zawierav jeden znak ascii, to jest tylko 1 lub 2 etc.
+endl moze przeszkadzac
+*/
+
+vector<string> ReturnCharArray(string filename);
+{
+  fstream file;
+  string data;
+  vector<string> characters[];
+  file.open(filename.c_str(),ios::in)
+  if (file.good())
+  {
+    while(!file.eof())
+    {
+      getline(file,data);
+      characters.push_back(data);
+      characters.push_back("\n");
+    }
+  }
+  file.close();
+  return characters;
+}
+
+void PrintAsciiChar(vector<string> input)
+{
+  /* Zakladajac, ze poprzednia funkcja dziala, powinnismy wydrukowac
+    poprzez iteracje wartosci tablicy characters, narazie jeden znak
+  */
+  for(int i = 0; i<FileLength;i++)
+  {
+    printf("%s \n", input[i] );
+  }
+}
