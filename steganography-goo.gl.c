@@ -5,6 +5,8 @@
 
 typedef unsigned char byte;
 
+#define BYTELEN 8
+
 typedef struct {
 	byte signature[2];
 	byte size[4];
@@ -48,7 +50,7 @@ int main() //////////////////////////////////////////MAIN XD////////////////////
 	//printf("%i", bmphead->width[0]);// dziala
 	int x;// = readonehex(bmphead->height, 4);
 	//printf("%i", x);// dziala
-	byte hold[8], byteholder = NULL; // hold trzyma calego bajta i z niego wyciagamy lsb, a do byteholder ladujemy bity w całość
+	byte hold[BYTELEN], byteholder = NULL; // hold trzyma calego bajta i z niego wyciagamy lsb, a do byteholder ladujemy bity w całość
 	//bool flag;
 	byte * arr = (byte *)malloc(sizeof(byte) * readonehex(bmphead->height) * readonehex(bmphead->width));// chyba bez 3
 	printf("%i\n\n", sizeof(byte) * readonehex(bmphead->height) * readonehex(bmphead->width) * 3);
@@ -59,30 +61,64 @@ int main() //////////////////////////////////////////MAIN XD////////////////////
 	//fread(&hold, sizeof(byte), 1, file);
 	//flag = hold & 1;
 	//byteholder |= flag << 7;
-	for (int i = 0; i < 512; i=i+8, counter++)//bierzemy 8 bajtow, z kazdego najmniejszy bit, jeden bit odpowiada kolorowi b g r i moze padding, 
+	for (int i = 0; i < 1024; i=i+BYTELEN, counter++)//bierzemy 8 bajtow, z kazdego najmniejszy bit, jeden bit odpowiada kolorowi b g r i moze padding, 
 	{
-		fread(&hold, sizeof(byte), 8, file);
+		fread(&hold, sizeof(byte), BYTELEN, file);
 		//if (hold[0] & 1) byteholder[0] |= 1 <<(8-8%i);//XDDDDDDDD co to jest, ustawiamy bit w miejscu najbardziej na lewo, caly czas schodzac, wycaigajac lsb
 		//else byteholder[0] |= 0 << (8 - 8 % i); //moze dziala xd, sprawdzimy, nie mozna modulo 0
 		//if(hold%2) byteholder |= 1 << (8 - 8 % i);
 		//else byteholder |= 0 << (8 - 8 % i);
 		//flag = hold & 1;
-		//byteholder |= flag << (8 % i);
-		byteholder |= (hold[0] & 1) << 7;
+		//byteholder |= flag << (8 % i);//dla 8 jakies smieci, to 7, w koncu ascii to 7 bit
+		#if (BYTELEN==8)
+		byteholder |= (hold[0] & 1) << 0;
+		byteholder |= (hold[1] & 1) << 1;
+		byteholder |= (hold[2] & 1) << 2;
+		byteholder |= (hold[3] & 1) << 3;
+		byteholder |= (hold[4] & 1) << 4;
+		byteholder |= (hold[5] & 1) << 5;
+		byteholder |= (hold[6] & 1) << 6;
+		byteholder |= (hold[7] & 1) << 7;
+		#endif // BYTELEN==8
+		#if (BYTELEN == 7)
+		byteholder |= (hold[0] & 1) << 6;//tez gowno daje
+		byteholder |= (hold[1] & 1) << 5;
+		byteholder |= (hold[2] & 1) << 4;
+		byteholder |= (hold[3] & 1) << 3;
+		byteholder |= (hold[4] & 1) << 2;
+		byteholder |= (hold[5] & 1) << 1;
+		byteholder |= (hold[6] & 1) << 0;
+		#endif
+		/*byteholder |= (hold[0] & 1) << 7;
 		byteholder |= (hold[1] & 1) << 6;
 		byteholder |= (hold[2] & 1) << 5;
 		byteholder |= (hold[3] & 1) << 4;
 		byteholder |= (hold[4] & 1) << 3;
 		byteholder |= (hold[5] & 1) << 2;
 		byteholder |= (hold[6] & 1) << 1;
-		byteholder |= (hold[7] & 1) << 0;
+		byteholder |= (hold[7] & 1) << 0;*/
+		/*byteholder |= (hold[0] & 1) << 6;//tez gowno daje
+		byteholder |= (hold[1] & 1) << 5;
+		byteholder |= (hold[2] & 1) << 4;
+		byteholder |= (hold[3] & 1) << 3;
+		byteholder |= (hold[4] & 1) << 2;
+		byteholder |= (hold[5] & 1) << 1;
+		byteholder |= (hold[6] & 1) << 0;*/
 		arr[counter] = byteholder;
 		//memcpy(&arr[counter], &byteholder, sizeof(byteholder));
 		byteholder = NULL;
 	}
-	for (int i = 0; i < 512/8; i++)//reszta to zera?
+	for (int i = 0; i < 1024/BYTELEN; i++)//reszta to zera?
 	{
 		printf("%hhx ", arr[i]);
+	}
+
+	printf("\n\n");
+
+
+	for (int i = 0; i < 1024 / BYTELEN; i++)//reszta to zera?
+	{
+		printf("%c ", arr[i]);
 	}
 	_getch();
 }
