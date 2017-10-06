@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <cstdlib>
+#include <time.h>
+#include <cstring>
+
+struct Data
+{
+	int num;
+	char character;
+	float fnum;
+};
+
+Data * randomize(int strnum);
+void freestructmem(Data * arr, int strnum);
+void sort(Data * arr, int strnum);
+int countChar(Data * arr, int strnum, char C);
+
+int main()
+{
+	srand(time(NULL));
+	clock_t start, end;
+	double timespent;
+
+	int num, i = 0;
+	char seek;
+
+	FILE * pfile;
+	pfile = fopen("inlab01.txt", "r");
+	if (pfile == NULL) perror("LUL");
+	char buffer[100], *hold = "";
+	while (fgets(buffer, 100, pfile) != NULL)
+	{
+		hold = strtok(buffer, " ");
+		while (hold != NULL)
+		{
+			if (i % 2 == 0) num = strtol(hold, NULL, 0);
+			if (i % 2 == 1)	seek = hold[0];
+		}
+	}
+
+
+	start = clock();
+
+	Data * arrpoint = NULL;
+	arrpoint = randomize(num);
+	sort(arrpoint, 5);
+	;
+	freestructmem(arrpoint,5);
+	
+}
+
+Data * randomize(int strnum)
+{
+	int randNum;
+	char randChar;
+	float randFloat;
+	int * arrofchecked = (int *)malloc(sizeof(int) * strnum);
+	for (int i = 0; i < strnum; i++)
+	{
+		arrofchecked[i] = NULL;
+	}
+
+	Data * arr = (Data *)malloc(sizeof(Data) * strnum);
+
+	/*for (int i = 0; i < strnum; i++)
+	{
+		arr[i] = (Data &)malloc(sizeof(Data));
+	}*/
+
+	for (int i = 0; i < strnum; i++)
+	{
+		randNum = rand() % 10001 - 1000;
+		for (int x = 0; x < strnum && x != NULL; x++)
+		{
+			while (randNum == arrofchecked[x])
+			{
+				randNum = rand() % 10001 - 1000;
+			}
+		}
+		randChar = rand() % 22 + 67; // 66 - B 88 - X
+		randFloat = 1000 + i + 1;
+
+		arr[i].num = randNum;
+		arr[i].character = randChar;
+		arr[i].fnum = randFloat;
+	}
+
+	return arr;
+}
+
+void freestructmem(Data * arr, int strnum)
+{
+	/*for (int i = 0; i < strnum; i++)
+	{
+		free(arr[i]);
+	}*/
+	free(arr);
+}
+
+void sort(Data * arr, int strnum)
+{
+	bool swapped;
+	int temp;
+	for (int i = 0; i < strnum; i++)
+	{
+		swapped = false;
+		for (int j = 0; j < strnum-1-i; j++)
+		{
+			temp = arr[j].num;
+			arr[j].num = arr[j + 1].num;
+			arr[j + 1].num = temp;
+			swapped = true;
+		}
+		if (!swapped) break;
+	}
+}
+
+int countChar(Data * arr, int strnum, char C)
+{
+	int counter = 0;
+	for (int i = 0; i < strnum; i++)
+	{
+		if (arr[i].character == C) counter++;
+	}
+	return counter;
+}
